@@ -1,0 +1,214 @@
+<!DOCTYPE html><html lang="en"><head>
+  
+  
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Manipulate the DOM with Vanilla JavaScript</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&amp;display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; }
+    
+    body { background: #f1f5f9; color: #1e293b; display: flex; justify-content: center; padding: 50px 20px; }
+
+    .container {
+      background: white; width: 100%; max-width: 600px;
+      border-radius: 16px; padding: 30px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    }
+
+    h1 { text-align: center; margin-bottom: 20px; color: #0f172a; }
+    
+    .panel { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; margin-bottom: 20px; transition: all 0.3s; }
+    
+    .btn {
+      background: #3b82f6; color: white; border: none;
+      padding: 10px 20px; border-radius: 8px; font-weight: 600;
+      cursor: pointer; transition: background 0.2s; margin-right: 10px; margin-bottom: 10px;
+    }
+    .btn:hover { background: #2563eb; }
+    .btn-danger { background: #ef4444; }
+    .btn-danger:hover { background: #dc2626; }
+    .btn-success { background: #10b981; }
+    .btn-success:hover { background: #059669; }
+
+    #targetBox {
+      width: 100%; height: 100px; background: #e2e8f0;
+      border-radius: 8px; display: flex; justify-content: center; align-items: center;
+      font-weight: 600; color: #64748b; transition: all 0.5s;
+    }
+
+    .highlight { background: #fef08a !important; color: #854d0e !important; border: 2px solid #eab308; }
+    .rounded { border-radius: 50px !important; }
+
+    ul { list-style-position: inside; margin-top: 10px; }
+    li { background: white; padding: 10px; border: 1px solid #e2e8f0; margin-bottom: 5px; border-radius: 6px; }
+
+  </style>
+
+            <meta name="description" content="A beautiful component imported via Developer Studio AI.">
+            <meta name="robots" content="index, follow">
+            <meta property="og:title" content="How to Manipulate the DOM with Vanilla JavaScript">
+            <meta property="og:description" content="A beautiful component imported via Developer Studio AI.">
+            <meta property="og:image" content="https://codescompiler.com/images/posts/how-to-manipulate-the-dom-with-vanilla-javascript-2.png">
+            <meta name="twitter:card" content="summary_large_image">
+            <meta name="twitter:title" content="How to Manipulate the DOM with Vanilla JavaScript">
+            <meta name="twitter:description" content="A beautiful component imported via Developer Studio AI.">
+            <meta name="twitter:image" content="https://codescompiler.com/images/posts/how-to-manipulate-the-dom-with-vanilla-javascript-2.png">
+          </head>
+<body>
+
+<!-- ── CODESCOMPILER DEMO HEADER ── -->
+<style>
+  #cc-demo-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    height: 48px;
+    background: #1a1b26;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: white;
+    box-sizing: border-box;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999999;
+  }
+  #cc-demo-header a { text-decoration: none; color: white; }
+  .cc-logo { font-size: 14px; font-weight: 900; }
+  .cc-logo span { color: #04aa6d; }
+  .cc-sep { width: 1px; height: 20px; background: rgba(255,255,255,0.12); margin: 0 12px; }
+  .cc-title { font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.65); flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .cc-actions { display: flex; gap: 8px; }
+  .cc-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 6px 12px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+    color: rgba(255,255,255,0.7);
+  }
+  .cc-btn:hover { background: rgba(255,255,255,0.15); color: white; }
+  .cc-btn svg { width: 14px; height: 14px; }
+  @media (max-width: 600px) {
+    .cc-title { display: none; }
+    .cc-btn span { display: none; }
+  }
+</style>
+<header id="cc-demo-header">
+  <div style="display: flex; align-items: center; overflow: hidden;">
+    <a href="https://codescompiler.com" class="cc-logo" target="_blank" rel="dofollow"><span>Codes</span>Compiler</a>
+    <div class="cc-sep"></div>
+    <h1 class="cc-title" title="How to Manipulate the DOM with Vanilla JavaScript" style="margin: 0; font-size: 13px; font-weight: 600;">📺 How to Manipulate the DOM with Vanilla JavaScript</h1>
+  </div>
+  <div class="cc-actions">
+    <a href="https://codescompiler.com/blog/how-to-manipulate-the-dom-with-vanilla-javascript-2" class="cc-btn" target="_blank" rel="dofollow" title="Read the full post">
+      <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path></svg>
+      <span>Back to Post</span>
+    </a>
+    <a href="index.html" class="cc-btn" target="_blank" download="how-to-manipulate-the-dom-with-vanilla-javascript-2.html" title="Download source file">
+      <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+      <span>Download</span>
+    </a>
+    <button onclick="document.getElementById('cc-demo-header').style.display='none'" class="cc-btn" title="Hide header for fullscreen view">
+      <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l5-5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path></svg>
+      <span>Fullscreen</span>
+    </button>
+  </div>
+</header>
+<!-- ================================== -->
+
+
+  <div class="container">
+    <h1>Vanilla JS DOM Playground</h1>
+
+    <div class="panel">
+      <h3>1. Style Manipulation</h3>
+      <p style="margin: 10px 0; color:#64748b; font-size: 0.9rem;">Click the buttons to change the styles of the box below using JavaScript.</p>
+      
+      <div id="targetBox">Target Element</div>
+      <br>
+      
+      <button class="btn" id="btnColor">Change Color</button>
+      <button class="btn" id="btnShape">Toggle Shape</button>
+      <button class="btn btn-danger" id="btnReset">Reset</button>
+    </div>
+
+    <div class="panel">
+      <h3>2. Element Creation &amp; Deletion</h3>
+      <p style="margin: 10px 0; color:#64748b; font-size: 0.9rem;">Dynamically add and remove elements from the DOM.</p>
+      
+      <button class="btn btn-success" id="btnAdd">Add List Item</button>
+      <button class="btn btn-danger" id="btnRemove">Remove Last Item</button>
+
+      <ul id="dynamicList">
+        <li>Starting Item 1</li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    // --- Section 1: Style Manipulation ---
+    const targetBox = document.getElementById('targetBox');
+    const btnColor = document.getElementById('btnColor');
+    const btnShape = document.getElementById('btnShape');
+    const btnReset = document.getElementById('btnReset');
+
+    btnColor.addEventListener('click', () => {
+      // Toggle a CSS class
+      targetBox.classList.toggle('highlight');
+      
+      // Direct style manipulation
+      if (targetBox.classList.contains('highlight')) {
+        targetBox.textContent = "Highlighted!";
+      } else {
+        targetBox.textContent = "Target Element";
+      }
+    });
+
+    btnShape.addEventListener('click', () => {
+      targetBox.classList.toggle('rounded');
+    });
+
+    btnReset.addEventListener('click', () => {
+      targetBox.className = ''; // Remove all classes
+      targetBox.textContent = "Target Element";
+    });
+
+    // --- Section 2: Element Creation & Deletion ---
+    const dynamicList = document.getElementById('dynamicList');
+    const btnAdd = document.getElementById('btnAdd');
+    const btnRemove = document.getElementById('btnRemove');
+    let itemCount = 1;
+
+    btnAdd.addEventListener('click', () => {
+      itemCount++;
+      // Create a new element
+      const newLi = document.createElement('li');
+      newLi.textContent = `Dynamically Added Item ${itemCount}`;
+      
+      // Append it to the parent
+      dynamicList.appendChild(newLi);
+    });
+
+    btnRemove.addEventListener('click', () => {
+      // Check if there are children to remove
+      if (dynamicList.lastElementChild) {
+        // Remove the child from the parent
+        dynamicList.removeChild(dynamicList.lastElementChild);
+      } else {
+        alert("The list is empty!");
+      }
+    });
+  </script>
+
+
+</body></html>
